@@ -1,8 +1,27 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
+import { TopMenu } from  "./components";
 
-const manrope = Manrope({ subsets: ["latin"] });
+
+
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+          <body className="min-h-screen">
+      <TopMenu />
+      { children }
+    </body>
+    </html>
+  );
+}
+
+/*
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,3 +39,4 @@ export default function RootLayout({
     </html>
   );
 }
+*/
