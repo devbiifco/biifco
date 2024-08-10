@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
-import { TopMenu } from  "./components";
 
 
 
@@ -14,7 +13,6 @@ export default function RootLayout({
   return (
     <html lang="en">
           <body className="min-h-screen">
-      <TopMenu />
       { children }
     </body>
     </html>
