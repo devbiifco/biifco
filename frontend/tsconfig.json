@@ -12,7 +12,6 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "types": ["node", "react", "react-dom"],  // Añadir aquí si no está presente
     "plugins": [
       {
         "name": "next"
