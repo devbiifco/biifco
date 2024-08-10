@@ -1,24 +1,24 @@
 
-import type { Metadata, Metadata } from "next";
-import { Manrope } from "next/font/google";
+import type { Metadata } from "next";
 import "./globals.css";
+import { inter } from "@/config/fonts";
+
+
 
 export const metadata: Metadata = {
   title: 'biifco platform',
-  description: 'Unleash the Full Potential of blockchain'
+  description: 'Unleash the Full Potential of blockchain',
 }
 
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
-          <body className="min-h-screen">
-      { children }
-    </body>
+      <body classname={inter.className}>{children}</body>
     </html>
-  );
+  )
 }
