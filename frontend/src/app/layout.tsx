@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
 import "./globals.css";
 import React from "react";
-
-const manrope = Manrope({ subsets: ["latin"] });
+import { textFont, roboto_mono } from "../config/fonts";
 
 export const metadata: Metadata = {
   title: "biifco platform",
@@ -17,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={manrope.className}>{children}</body>
+      <body className={textFont.className}>{children}</body>
     </html>
   );
 }
