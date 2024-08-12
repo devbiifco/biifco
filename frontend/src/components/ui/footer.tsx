@@ -1,8 +1,20 @@
-import React from 'react';
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaCookieBite, FaBolt, FaGlobe } from 'react-icons/fa';
+"use client";
+
+import React, { useState, useEffect } from 'react';
+import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaCookieBite, FaBolt, FaGlobe, FaSun, FaMoon } from 'react-icons/fa';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Footer: React.FC = () => {
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
   return (
     <footer className="bg-white text-black p-8 py-4 w-full fixed bottom-0 left-0">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
@@ -54,6 +66,19 @@ const Footer: React.FC = () => {
             <FaBolt />
             <span>Service Status</span>
           </div>
+          <div className="flex items-center space-x-2 ml-6">
+          <div 
+            onClick={() => setDarkMode(!darkMode)} 
+            className={`cursor-pointer w-16 h-8 rounded-full p-3 flex items-center ${darkMode ? 'bg-gray-100' : 'bg-gray-100'}`}
+          >
+            <FaSun 
+              className={`transition-colors duration-300 ${darkMode ? 'text-blue-600' : 'text-black'}`} 
+            />
+            <FaMoon 
+              className={`ml-auto transition-colors duration-300 ${darkMode ? 'text-black' : 'text-blue-600'}`} 
+            />
+          </div>
+        </div>
         </div>
       </div>
     </footer>
