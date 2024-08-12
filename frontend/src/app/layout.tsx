@@ -19,6 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${textFont.className} flex flex-col min-h-screen`}>
         <Header />
+
         <main className="flex-1">
           {children}
         </main>

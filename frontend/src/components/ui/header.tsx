@@ -7,7 +7,7 @@ const Header: React.FC = () => {
     <div className="container mx-auto flex justify-between items-center p-8">
         {/* Logo con Imagen */}
         <div className="flex items-center">
-          <Image src="../biifco.svg" alt="biifco" width={145} height={35} />
+          <Image src="../biifco.svg" alt="biifco" width={130} height={32} />
 
       </div>
         {/* Navegación */}

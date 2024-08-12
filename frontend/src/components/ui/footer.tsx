@@ -6,16 +6,23 @@ import Image from 'next/image';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="container mx-auto flex justify-between items-center p-8">
+    <footer className="container mx-auto flex justify-between items-center p-6">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center px-4">
         {/* Logo y Copyright */}
-        <div className="flex items-center space-x-8 mb-4 md:mb-0">
+        <div className="flex items-center space-x-4 mb-4 md:mb-0">
           {/* Logo de la Marca */}
-          <Image src="/biifco.svg" alt="biifco" width={95} height={23} />
+          <Image src="/iso-biifco.svg" alt="biifco" width={30} height={30} />
           {/* Copyright */}
           <div className="text-sm">
             &copy; {new Date().getFullYear()} Biffco • All Rights Reserved.
           </div>
+
+            <div className="text-sm">
+              Terms of Service
+            </div>
+            <div className="text-sm">
+              Privacy Policy
+            </div>
         </div>
 
         {/* Redes Sociales */}
