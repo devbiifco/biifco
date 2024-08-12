@@ -20,7 +20,7 @@ export default function RootLayout({
       <body className={`${textFont.className} flex flex-col min-h-screen`}>
         <Header />
 
-        <main className="flex-1">
+        <main className="flex-grow flex justify-center items-center">
           {children}
         </main>
         <Footer />
