@@ -1,10 +1,12 @@
 import { Manrope } from "next/font/google";
 import Image from "next/image";
 import React from "react";
-import { roboto_mono, textFont } from "../config/fonts";
-import Header from '@/components/ui/header';
-import { AppProps } from "next/app";
+import { textFont } from "../config/fonts";
 /*import Footer from '../components/Footer';*/
+
+import type { AppProps } from 'next/app';
+import Header from '@/components/ui/header';
+import '../styles/globals.css'; 
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
