@@ -1,7 +1,9 @@
-import type { Metadata } from "next";
-import "./globals.css";
 import React from "react";
-import { textFont, roboto_mono } from "../config/fonts";
+import { Metadata } from "next";
+import "./globals.css";
+import { textFont } from "../config/fonts";
+import Header from '@/components/ui/header';
+import Footer from '@/components/ui/footer';
 
 export const metadata: Metadata = {
   title: "biifco platform",
@@ -15,7 +17,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={textFont.className}>{children}</body>
+      <body className={`${textFont.className} flex flex-col min-h-screen`}>
+        <Header />
+        <main className="flex-1">
+          {children}
+        </main>
+        <Footer />
+      </body>
     </html>
   );
 }

@@ -1,16 +1,10 @@
-import { Manrope } from "next/font/google";
-import Image from "next/image";
 import React from "react";
-import { textFont } from "../config/fonts";
-/*import Footer from '../components/Footer';*/
 
-import type { AppProps } from 'next/app';
-import Header from '@/components/ui/header';
-
-export default function App({ Component, pageProps }: AppProps) {
+export default function Page() {
   return (
-    <>
-      <Header />
-    </>
-  )
+    <div className="container mx-auto flex justify-between items-center p-8">
+      {/* Contenido específico de la página */}
+      <h1>Welcome to Biifco Platform</h1>
+    </div>
+  );
 }
