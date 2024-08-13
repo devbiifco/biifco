@@ -1,36 +1,26 @@
-"use client"; // Asegúrate de que esto esté al inicio del archivo
-
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import TextButton from './textButton';
 import PrimaryButton from './primaryButton';
 
+// Componente Header
 const Header: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   return (
-    <header className="bg-white w-full fixed top-0 left-0 z-10 shadow-md">
-      <div className="container mx-auto p-4 flex items-center justify-between">
-        {/* Logo de la marca */}
-        <Link href="/" legacyBehavior>
-          <a>
-            <Image src="/biifco.svg" alt="biifco" width={130} height={32} />
-          </a>
-        </Link>
+    <header className="bg-white w-full fixed top-0 left-0 z-10">
+      <div className="container mx-auto flex justify-between items-center p-8">
 
-        {/* Botón de menú para móviles */}
-        <button
-          className="block md:hidden text-gray-600"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
+        {/* Logo de la marca */}
+        <div className="flex items-center">
+          <Link href="/" legacyBehavior>
+            <a>
+              <Image src="/biifco.svg" alt="biifco" width={130} height={32} />
+            </a>
+          </Link>
+        </div>
 
         {/* Navegación principal */}
-        <nav className={`md:flex md:space-x-4 text-sm ${isMenuOpen ? 'block' : 'hidden'}`}>
+        <nav className="flex space-x-4 text-sm">
           <Link href="#Products" legacyBehavior>
             <TextButton href="#Products">Products</TextButton>
           </Link>
@@ -49,7 +39,7 @@ const Header: React.FC = () => {
         </nav>
 
         {/* Sección de botones de acciones (Login, Contact, Sign Up) */}
-        <div className="hidden md:flex space-x-4 text-sm">
+        <div className="flex space-x-4 text-sm">
           <Link href="/login" legacyBehavior>
             <PrimaryButton href="/login">Login</PrimaryButton>
           </Link>
@@ -66,3 +56,4 @@ const Header: React.FC = () => {
 };
 
 export default Header;
+

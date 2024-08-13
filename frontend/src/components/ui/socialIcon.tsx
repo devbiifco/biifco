@@ -1,4 +1,3 @@
-// src/components/ui/SocialIcon.tsx
 import React from 'react';
 
 interface SocialIconProps {
@@ -8,7 +7,12 @@ interface SocialIconProps {
 
 const SocialIcon: React.FC<SocialIconProps> = ({ href, icon }) => {
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer">
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="transition-colors duration-300 text-black hover:text-blue-600"
+    >
       {icon}
     </a>
   );
