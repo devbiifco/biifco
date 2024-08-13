@@ -1,18 +1,16 @@
+// src/components/ui/socialIcon.tsx
+"use client";
+
 import React from 'react';
 
 interface SocialIconProps {
-  href: string;
   icon: React.ReactNode;
+  url: string;
 }
 
-const SocialIcon: React.FC<SocialIconProps> = ({ href, icon }) => {
+const SocialIcon: React.FC<SocialIconProps> = ({ icon, url }) => {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="transition-colors duration-300 text-black hover:text-blue-600"
-    >
+    <a href={url} className="text-gray-700 hover:text-gray-900">
       {icon}
     </a>
   );
