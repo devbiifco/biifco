@@ -57,9 +57,10 @@ const Header: React.FC = () => {
 
             {/* Botones de autenticación */}
             <div className="flex flex-col items-center space-y-2 pt-4">
-              <a href="/login" onClick={toggleMenu} className="bg-gray-100 text-gray-800 hover:bg-gray-200 py-1 px-4 rounded-full transition-all duration-300">Login</a>
-              <a href="#signup" onClick={toggleMenu} className="bg-blue-600 text-white hover:bg-blue-700 py-1 px-4 rounded-full transition-all duration-300">Sign Up</a>
-            </div>
+          <a href="/login" className="hover:bg-gray-100 py-1 px-4 rounded-full transition-all duration-300">Login</a>
+          <a href="#signup" className="rounded bg-gray-100 text-gray-800 hover:text-white hover:bg-blue-600 py-1 px-4 rounded-full transition-all duration-300">Contact</a>
+          <a href="#signup" className="rounded bg-gray-100 text-gray-800 hover:text-white hover:bg-blue-600 py-1 px-4 rounded-full transition-all duration-300">Sign Up</a>
+         </div>
           </nav>
         </div>
       )}
