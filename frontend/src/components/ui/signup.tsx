@@ -82,7 +82,7 @@ const Signup: React.FC = () => {
         </div>
         <button 
           type="submit" 
-          className="px-12 py-2 bg-secondary text-black rounded-full hover:bg-primary transition-colors duration-300"
+          className="rounded bg-secondary text-black hover:text-white hover:bg-primary py-1 px-4 rounded-full transition-all duration-300"
         >
           Sign Up
         </button>
