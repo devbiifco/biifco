@@ -90,7 +90,7 @@ const Footer: React.FC = () => {
           {/* Enlace al Estado del Servicio */}
           <div className="flex items-center space-x-2 py-0 px-4 hover:bg-primary hover:text-white rounded-full">
             <FaBolt />
-            <span>Service Status</span>
+            <span>Status</span>
           </div>
 
           {/* Interruptor de Modo Claro/Oscuro */}
