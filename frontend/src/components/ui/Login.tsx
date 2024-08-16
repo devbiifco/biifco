@@ -24,14 +24,14 @@ const Login: React.FC = () => {
       </div>
       
       {/* Botón para continuar con el email */}
-      <button className="flex items-center space-x-2 px-12 py-2 mb-4 hover:text-blue-600 transition-colors duration-300">
+      <button className="flex items-center space-x-2 px-12 py-2 mb-4 hover:text-primary transition-colors duration-300">
         <span>Continue with Email</span>
         <span>&rarr;</span>
       </button>
       
       {/* Enlaces para sign up y recuperación de contraseña */}
-      <a href="#" className="text-sm mb-2 hover:text-blue-600 transition-colors duration-300">Don’t have an account? Sign Up</a>
-      <a href="#" className="text-sm hover:text-blue-600 transition-colors duration-300">Forgot your user/password?</a>
+      <a href="/signup" className="text-sm mb-2 hover:text-primary transition-colors duration-300">Don’t have an account? Sign Up</a>
+      <a href="#" className="text-sm hover:text-primary transition-colors duration-300">Forgot your user/password?</a>
     </div>
   );
 };

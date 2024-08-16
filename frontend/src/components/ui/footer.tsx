@@ -36,8 +36,9 @@ const Footer: React.FC = () => {
         {/* Sección de Logo y Copyright */}
         <div className="flex items-center mb-4 md:mb-0 space-x-4">
           {/* Logo de la Marca */}
+          <Link href="/">
           <Image src="/iso-biifco.svg" alt="biifco" width={25} height={25} />
-
+          </Link>
           {/* Texto de Copyright */}
           <div className="text-sm">
            <Copyright />
@@ -45,12 +46,12 @@ const Footer: React.FC = () => {
 
           {/* Enlaces a Términos de Servicio y Política de Privacidad */}
           <div className="text-sm">
-            <Link href="#" className="hover:text-blue-600">
+            <Link href="#" className="hover:text-primary">
               Terms of Service
             </Link>
           </div>
           <div className="text-sm">
-            <Link href="#" className="hover:text-blue-600">
+            <Link href="#" className="hover:text-primary">
               Privacy Policy
             </Link>
           </div>
@@ -59,35 +60,35 @@ const Footer: React.FC = () => {
         {/* Sección de Íconos de Redes Sociales */}
         <div className="flex mb-4 md:mb-0 space-x-4">
           <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-            <FaFacebook className="text-xl hover:text-blue-600" />
+            <FaFacebook className="text-xl hover:hover:text-primary" />
           </a>
           <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-            <FaTwitter className="text-xl hover:text-blue-600" />
+            <FaTwitter className="text-xl hover:text-primary" />
           </a>
           <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-            <FaInstagram className="text-xl hover:text-blue-600" />
+            <FaInstagram className="text-xl hover:text-primary" />
           </a>
           <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-            <FaLinkedin className="text-xl hover:text-blue-600" />
+            <FaLinkedin className="text-xl hover:text-primary" />
           </a>
         </div>
 
         {/* Sección de Cookies, Estado del Servicio y Selector de Idioma */}
         <div className="flex space-x-2 text-sm">
           {/* Selector de Idioma */}
-          <div className="flex items-center space-x-2 py-1 px-4 hover:bg-blue-600 hover:text-white rounded-full">
+          <div className="flex items-center space-x-2 py-0 px-4 hover:bg-primary hover:text-white rounded-full">
             <LanguageDropdown />
           </div>
 
           {/* Enlace a la Sección de Cookies */}
-          <div className="flex items-center space-x-2 py-1 px-4 hover:bg-blue-600 hover:text-white rounded-full">
+          <div className="flex items-center space-x-2 py-0 px-4 hover:bg-primary hover:text-white rounded-full">
             <FaCookieBite />
             <span>Cookies</span>         
           </div>
      
 
           {/* Enlace al Estado del Servicio */}
-          <div className="flex items-center space-x-2 py-1 px-4 hover:bg-blue-600 hover:text-white rounded-full">
+          <div className="flex items-center space-x-2 py-0 px-4 hover:bg-primary hover:text-white rounded-full">
             <FaBolt />
             <span>Service Status</span>
           </div>
@@ -100,12 +101,12 @@ const Footer: React.FC = () => {
             >
               {/* Ícono del Sol (Modo Claro) */}
               <FaSun
-                className={`transition-colors duration-300 ${darkMode ? 'text-blue-600' : 'text-black'}`}
+                className={`transition-colors duration-300 ${darkMode ? 'text-primary' : 'text-black'}`}
               />
 
               {/* Ícono de la Luna (Modo Oscuro) */}
               <FaMoon
-                className={`ml-auto transition-colors duration-300 ${darkMode ? 'text-black' : 'text-blue-600'}`}
+                className={`ml-auto transition-colors duration-300 ${darkMode ? 'text-black' : 'text-primary'}`}
               />
             </div>
           </div>

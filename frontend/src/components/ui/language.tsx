@@ -22,7 +22,7 @@ const LanguageDropdown: React.FC = () => {
             {/* Botón para abrir/cerrar el menú desplegable */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center space-x-2 hover:text-white hover:bg-blue-600 py-1 px-4 rounded-full"
+                className="flex items-center space-x-2 hover:text-white hover:bg-primary py-1 px-4 rounded-full"
             >
                 {/* Icono de globo */}
                 <FaGlobe />
