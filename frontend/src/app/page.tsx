@@ -8,7 +8,7 @@ export default function Page() {
       {/* Contenido específico de la página */}
 
       
-      <p>Hola mundo</p> {/* Muestra el mensaje "Hola mundo" */}
+      <p>hay cambios, hay que actualizar</p> {/* Muestra el mensaje "Hola mundo" */}
 
 
     </div>
