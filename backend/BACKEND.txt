@@ -1,1 +1,0 @@
-Este es un archivo de prueba que se creo para que se cree la carpeta backend en github. pero le realizamos cambios en remoto para probar la funcion pull.
