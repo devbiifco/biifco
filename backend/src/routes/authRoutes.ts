@@ -1,5 +1,5 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import jwt, { JwtPayload, VerifyErrors } from 'jsonwebtoken';
 import { registerUser, loginUser } from '../controllers/authController';
 import { check, validationResult } from 'express-validator';
 
@@ -11,7 +11,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
 // Middleware de validación para la ruta de registro
 const validateRegister = [
   check('email').isEmail().withMessage('Enter a valid email'),
-  check('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long')
+  check('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
 ];
 
 // Ruta para registrar un nuevo usuario
@@ -23,7 +23,7 @@ router.post('/register', validateRegister, (req: Request, res: Response, next: N
     return res.status(400).json({ errors: errors.array() });
   }
   // Si no hay errores, pasa al siguiente middleware (registerUser)
-  return next();
+  return next(); // Asegúrate de retornar aquí
 }, registerUser);
 
 // Ruta para iniciar sesión
@@ -37,7 +37,7 @@ router.post('/refresh-token', (req: Request, res: Response) => {
   }
 
   // Verifica el token
-  jwt.verify(token, JWT_SECRET, (err: jwt.VerifyErrors | null, decoded: JwtPayload | string | undefined) => {
+  jwt.verify(token, JWT_SECRET, (err: VerifyErrors | null, decoded: JwtPayload | string | undefined) => {
     if (err || !decoded) {
       return res.sendStatus(403); // Prohibido si el token no es válido
     }
@@ -51,11 +51,9 @@ router.post('/refresh-token', (req: Request, res: Response) => {
       return res.sendStatus(403); // Prohibido si el token no contiene `id`
     }
   });
-  // Asegúrate de que se retorne una respuesta en todos los caminos
-  return res.sendStatus(500); // En caso de error en la verificación, asegúrate de retornar un estado
+
+  // Retorno explícito al final para cumplir con el tipo de retorno de la ruta
+  return; // Asegúrate de que esta línea esté presente
 });
-
-// Ruta para acceso de admin
-
 
 export default router;
