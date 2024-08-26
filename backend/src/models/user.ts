@@ -1,24 +1,50 @@
 import mongoose, { Document, Schema } from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 export interface IUser extends Document {
-  name: string;
   email: string;
   password: string;
-  role: 'user' | 'admin';
-  walletAddress: string;
+  role: string;
+  comparePassword: (password: string) => Promise<boolean>;
 }
 
-const UserSchema: Schema = new Schema(
-  {
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    role: { type: String, enum: ['user', 'admin'], default: 'user' },
-    walletAddress: { type: String, required: true, unique: true },
+const userSchema: Schema = new Schema({
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
   },
-  {
-    timestamps: true,
-  }
-);
+  password: {
+    type: String,
+    required: true,
+  },
+  role: {
+    type: String,
+    enum: ['user', 'admin'],
+    default: 'user',
+  },
+});
 
-export default mongoose.model<IUser>('User', UserSchema);
+// Encriptar la contraseña antes de guardar el usuario
+userSchema.pre<IUser>('save', async function (next) {
+  if (!this.isModified('password')) {
+    return next();
+  }
+  try {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  } catch (err) {
+    next(err as Error); // Asegúrate de castar el error como Error
+  }
+});
+
+// Comparar contraseñas
+userSchema.methods.comparePassword = async function (password: string) {
+  return bcrypt.compare(password, this.password);
+};
+
+const User = mongoose.model<IUser>('User', userSchema);
+
+export default User;
