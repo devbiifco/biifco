@@ -26,6 +26,7 @@ app.use(limiter);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes); // Usa las rutas de usuario
 
+
 app.get('/', (_, res) => res.send('API is OK...'));
 
 const PORT = process.env.PORT || 5000;

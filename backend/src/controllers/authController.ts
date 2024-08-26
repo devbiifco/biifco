@@ -30,7 +30,7 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
     const user = await User.findOne({ email });
     if (!user || !(await user.comparePassword(password))) {
       res.status(400).json({ error: 'Invalid credentials' });
-      return; // Asegúrate de que la función no continúe después de enviar una respuesta.
+      return;
     }
     const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
     res.json({ token });

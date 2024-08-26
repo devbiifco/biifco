@@ -1,12 +1,21 @@
 import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
 
-export const authenticateToken = (req: Request, res: Response, next: NextFunction): void => {
+// Define una interfaz para el objeto de usuario decodificado
+interface CustomRequest extends Request {
+  user?: string | JwtPayload;
+}
+
+export const authenticateToken = (
+  req: CustomRequest,
+  res: Response,
+  next: NextFunction
+): void => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 
@@ -20,7 +29,7 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
       res.sendStatus(403);
       return;
     }
-    (req as any).user = user;
+    req.user = user; // Asigna el usuario decodificado al request
     next();
   });
 };
