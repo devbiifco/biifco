@@ -16,13 +16,10 @@ const validateRegister = [
 
 // Ruta para registrar un nuevo usuario
 router.post('/register', validateRegister, (req: Request, res: Response, next: NextFunction) => {
-  // Verifica si hay errores de validación
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    // Si hay errores, responde con un estado 400 y los errores
     return res.status(400).json({ errors: errors.array() });
   }
-  // Si no hay errores, pasa al siguiente middleware (registerUser)
   return next(); // Asegúrate de retornar aquí
 }, registerUser);
 
@@ -30,19 +27,22 @@ router.post('/register', validateRegister, (req: Request, res: Response, next: N
 router.post('/login', loginUser);
 
 // Ruta para refrescar el token
-router.post('/refresh-token', (req: Request, res: Response) => {
+router.post('/refresh-token', async (req: Request, res: Response) => {
   const { token } = req.body;
   if (!token) {
     return res.sendStatus(401); // No autorizado si no se proporciona token
   }
 
-  // Verifica el token
-  jwt.verify(token, JWT_SECRET, (err: VerifyErrors | null, decoded: JwtPayload | string | undefined) => {
-    if (err || !decoded) {
-      return res.sendStatus(403); // Prohibido si el token no es válido
-    }
+  try {
+    const decoded = await new Promise<JwtPayload | string | undefined>((resolve, reject) => {
+      jwt.verify(token, JWT_SECRET, (err: VerifyErrors | null, decoded: JwtPayload | string | undefined) => {
+        if (err) {
+          return reject(err);
+        }
+        resolve(decoded);
+      });
+    });
 
-    // Asegúrate de que `decoded` tenga una propiedad `id`
     if (typeof decoded === 'object' && 'id' in decoded) {
       const { id } = decoded as JwtPayload;
       const newToken = jwt.sign({ id }, JWT_SECRET, { expiresIn: '1h' });
@@ -50,10 +50,9 @@ router.post('/refresh-token', (req: Request, res: Response) => {
     } else {
       return res.sendStatus(403); // Prohibido si el token no contiene `id`
     }
-  });
-
-  // Retorno explícito al final para cumplir con el tipo de retorno de la ruta
-  return; // Asegúrate de que esta línea esté presente
+  } catch (error) {
+    return res.sendStatus(403); // Prohibido si ocurre un error al verificar el token
+  }
 });
 
 export default router;

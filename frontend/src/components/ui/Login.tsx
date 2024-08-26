@@ -1,7 +1,9 @@
+"use client";
+
 // src/components/ui/Login.tsx
 import React, { useState } from 'react';
 import axiosInstance from '../../utils/axiosInstance';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation'; // Cambiado a next/navigation
 
 /**
  * Componente de inicio de sesión.
