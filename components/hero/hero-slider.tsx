@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { cn } from "@/lib/utils"
+import type { EmblaOptionsType } from 'embla-carousel'
 
 export function HeroSlider() {
   const isDesktop = useMediaQuery("(min-width: 768px)")
@@ -29,18 +30,19 @@ export function HeroSlider() {
     })
   }, [api])
 
+  const carouselOptions: EmblaOptionsType = {
+    align: "start",
+    loop: true,
+    dragFree: !isDesktop,
+    containScroll: "trimSnaps",
+    axis: isDesktop ? "x" : "y",
+  }
+
   return (
     <div className="relative">
       <Carousel
         setApi={setApi}
-        opts={{
-          align: "start",
-          loop: true,
-          dragFree: !isDesktop,
-          containScroll: "trimSnaps",
-          axis: isDesktop ? "x" : "y",
-          direction: isDesktop ? "ltr" : "ttb"
-        }}
+        opts={carouselOptions}
         className="w-full"
         orientation={isDesktop ? "horizontal" : "vertical"}
       >
