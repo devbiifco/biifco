@@ -36,14 +36,26 @@ export function HeroSlider() {
         opts={{
           align: "start",
           loop: true,
-          axis: isDesktop ? "x" : "y"
+          dragFree: !isDesktop,
+          containScroll: "trimSnaps",
+          axis: isDesktop ? "x" : "y",
+          direction: isDesktop ? "ltr" : "ttb"
         }}
         className="w-full"
         orientation={isDesktop ? "horizontal" : "vertical"}
       >
-        <CarouselContent className={isDesktop ? "" : "flex-col h-[100vh]"}>
+        <CarouselContent className={cn(
+          "h-[100vh]",
+          isDesktop ? "" : "-mt-4 pt-4"
+        )}>
           {heroSlides.map((slide, index) => (
-            <CarouselItem key={index} className={isDesktop ? "h-[100vh]" : "flex-none h-full"}>
+            <CarouselItem 
+              key={index} 
+              className={cn(
+                "h-full",
+                isDesktop ? "" : "pt-4"
+              )}
+            >
               <div className="relative h-full">
                 <Card className="relative overflow-hidden h-full bg-background">
                   <Image
@@ -86,7 +98,10 @@ export function HeroSlider() {
           <CarouselNext className="right-12" />
         </div>
       </Carousel>
-      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2">
+      <div className={cn(
+        "absolute left-1/2 transform -translate-x-1/2 flex gap-2",
+        isDesktop ? "bottom-6" : "right-6 bottom-1/2 translate-y-1/2 flex-col"
+      )}>
         {heroSlides.map((_, index) => (
           <button
             key={index}
@@ -94,7 +109,8 @@ export function HeroSlider() {
               "w-2 h-2 rounded-full transition-all",
               current === index
                 ? "bg-primary w-6"
-                : "bg-primary/50 hover:bg-primary/75"
+                : "bg-primary/50 hover:bg-primary/75",
+              !isDesktop && current === index && "!h-6 !w-2"
             )}
             onClick={() => api?.scrollTo(index)}
           />
