@@ -60,6 +60,8 @@ export const pricingPlans = [
       "2 team members",
       "30-day data retention",
     ],
+    popular: false,
+
   },
   {
     name: "Professional",
@@ -104,5 +106,7 @@ export const pricingPlans = [
       "SLA guarantee",
       "Compliance reporting",
     ],
+    popular: false,
+
   },
 ] as const
