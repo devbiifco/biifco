@@ -36,7 +36,7 @@ export function HeroSlider() {
         opts={{
           align: "start",
           loop: true,
-          direction: isDesktop ? "ltr" : "ttb",
+          direction: isDesktop ? "ltr" : "vertical" as any,
         }}
         className="w-full"
         orientation={isDesktop ? "horizontal" : "vertical"}
