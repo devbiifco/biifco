@@ -34,7 +34,7 @@ const supplyChainSteps = [
 
 export function ProcessSteps() {
   return (
-    <section className="py-24 bg-muted/50 w-full">
+    <section className="py-24  w-full">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center text-center space-y-4 mb-16">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">

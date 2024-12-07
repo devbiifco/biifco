@@ -17,7 +17,7 @@ export function Header() {
             <MobileNav />
             <Link href="/home" className="ml-4 md:ml-0">
               <Logo />
-            </Link>
+            </Link> 
           </div>
           
           <MainNav />

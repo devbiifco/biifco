@@ -2,21 +2,49 @@
 
 import * as React from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { signIn } from "next-auth/react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Icons } from "@/components/ui/icons"
+import { toast } from "sonner"
 
 export default function LoginPage() {
+  const router = useRouter()
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
     setIsLoading(true)
 
-    setTimeout(() => {
+    const form = event.target as HTMLFormElement
+    const email = (form.elements.namedItem('email') as HTMLInputElement).value
+    const password = (form.elements.namedItem('password') as HTMLInputElement).value
+
+    try {
+      const result = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      })
+
+      if (result?.error) {
+        toast.error("Invalid credentials")
+        return
+      }
+
+      router.push("/dashboard")
+      toast.success("Logged in successfully")
+    } catch (error) {
+      toast.error("Something went wrong")
+    } finally {
       setIsLoading(false)
-    }, 3000)
+    }
+  }
+
+  const handleProviderSignIn = (provider: string) => {
+    signIn(provider, { callbackUrl: "/dashboard" })
   }
 
   return (
@@ -36,6 +64,7 @@ export default function LoginPage() {
               type="email"
               placeholder="name@example.com"
               disabled={isLoading}
+              required
             />
           </div>
           <div className="grid gap-2">
@@ -52,6 +81,7 @@ export default function LoginPage() {
               id="password"
               type="password"
               disabled={isLoading}
+              required
             />
           </div>
           <Button type="submit" disabled={isLoading}>
@@ -81,24 +111,11 @@ export default function LoginPage() {
       <div className="flex justify-center gap-4">
         <button 
           type="button" 
+          onClick={() => handleProviderSignIn("google")}
           disabled={isLoading}
           className="p-2 hover:opacity-80 transition-opacity"
         >
           <Icons.google className="h-6 w-6" />
-        </button>
-        <button 
-          type="button" 
-          disabled={isLoading}
-          className="p-2 hover:opacity-80 transition-opacity"
-        >
-          <Icons.facebook className="h-6 w-6" />
-        </button>
-        <button 
-          type="button" 
-          disabled={isLoading}
-          className="p-2 hover:opacity-80 transition-opacity"
-        >
-          <Icons.apple className="h-6 w-6" />
         </button>
       </div>
     </div>

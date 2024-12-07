@@ -39,7 +39,7 @@ export default function AuthLayout({
           </Button>
           <blockquote className="space-y-6">
             <p className="text-lg text-white max-w-lg">
-              "Biifco has revolutionized how we manage our cattle supply chain. The platform's transparency and efficiency have transformed our operations, saving us time and resources while ensuring top-quality standards."
+              "Biifco has revolutionized how we manage our cattle supply chain. The platforms transparency and efficiency have transformed our operations, saving us time and resources while ensuring top-quality standards."
             </p>
             <footer className="text-sm text-white/80">
               <p className="font-semibold">Sarah Johnson</p>

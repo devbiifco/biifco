@@ -1,3 +1,5 @@
+
+
 export const mainNavItems = [
   {
     title: "Home",
@@ -110,3 +112,34 @@ export const pricingPlans = [
 
   },
 ] as const
+
+import { LayoutDashboard, Wallet, History, Settings, HelpCircle } from "lucide-react";
+
+// Aquí asignas los iconos como componentes
+export const sidebarItems = [
+  {
+    title: "Overview",
+    href: "/dashboard",
+    icon: LayoutDashboard,  // Usas el componente del ícono
+  },
+  {
+    title: "Wallet",
+    href: "/dashboard/wallet",
+    icon: Wallet,  // Usas el componente del ícono
+  },
+  {
+    title: "Activity",
+    href: "/dashboard/activity",
+    icon: History,  // Usas el componente del ícono
+  },
+  {
+    title: "Settings",
+    href: "/dashboard/settings",
+    icon: Settings,  // Usas el componente del ícono
+  },
+  {
+    title: "Help",
+    href: "/dashboard/help",
+    icon: HelpCircle,  // Usas el componente del ícono
+  },
+] as const;

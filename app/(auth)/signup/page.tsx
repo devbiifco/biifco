@@ -2,21 +2,61 @@
 
 import * as React from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { signIn } from "next-auth/react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Icons } from "@/components/ui/icons"
+import { toast } from "sonner"
 
 export default function SignUpPage() {
+  const router = useRouter()
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
     setIsLoading(true)
 
-    setTimeout(() => {
+    const form = event.target as HTMLFormElement
+    const name = (form.elements.namedItem('name') as HTMLInputElement).value
+    const email = (form.elements.namedItem('email') as HTMLInputElement).value
+    const password = (form.elements.namedItem('password') as HTMLInputElement).value
+
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password }),
+      })
+
+      if (!response.ok) {
+        const error = await response.text()
+        throw new Error(error)
+      }
+
+      const result = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      })
+
+      if (result?.error) {
+        toast.error("Failed to sign in")
+        return
+      }
+
+      router.push("/dashboard")
+      toast.success("Account created successfully")
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Something went wrong")
+    } finally {
       setIsLoading(false)
-    }, 3000)
+    }
+  }
+
+  const handleProviderSignIn = (provider: string) => {
+    signIn(provider, { callbackUrl: "/dashboard" })
   }
 
   return (
@@ -24,11 +64,21 @@ export default function SignUpPage() {
       <div className="space-y-2 text-center">
         <h1 className="text-2xl font-bold">Create an account</h1>
         <p className="text-sm text-muted-foreground">
-          Enter your email below to create your account
+          Enter your details below to create your account
         </p>
       </div>
       <form onSubmit={onSubmit}>
         <div className="grid gap-4">
+          <div className="grid gap-2">
+            <Label htmlFor="name">Name</Label>
+            <Input
+              id="name"
+              type="text"
+              placeholder="John Doe"
+              disabled={isLoading}
+              required
+            />
+          </div>
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
             <Input
@@ -36,6 +86,7 @@ export default function SignUpPage() {
               type="email"
               placeholder="name@example.com"
               disabled={isLoading}
+              required
             />
           </div>
           <div className="grid gap-2">
@@ -44,6 +95,7 @@ export default function SignUpPage() {
               id="password"
               type="password"
               disabled={isLoading}
+              required
             />
           </div>
           <Button type="submit" disabled={isLoading}>
@@ -73,24 +125,11 @@ export default function SignUpPage() {
       <div className="flex justify-center gap-4">
         <button 
           type="button" 
+          onClick={() => handleProviderSignIn("google")}
           disabled={isLoading}
           className="p-2 hover:opacity-80 transition-opacity"
         >
           <Icons.google className="h-6 w-6" />
-        </button>
-        <button 
-          type="button" 
-          disabled={isLoading}
-          className="p-2 hover:opacity-80 transition-opacity"
-        >
-          <Icons.facebook className="h-6 w-6" />
-        </button>
-        <button 
-          type="button" 
-          disabled={isLoading}
-          className="p-2 hover:opacity-80 transition-opacity"
-        >
-          <Icons.apple className="h-6 w-6" />
         </button>
       </div>
     </div>
