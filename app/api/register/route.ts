@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import bcrypt from "bcrypt"
 import { prisma } from "@/lib/prisma"
 import { createWallet } from "@/lib/web3"
+import { encrypt } from "@/lib/encryption"
 
 export async function POST(request: Request) {
   try {
@@ -21,7 +22,8 @@ export async function POST(request: Request) {
     }
 
     // Create wallet and encrypt private key
-    const { address: walletAddress, encryptedPrivateKey } = await createWallet()
+    const { address: walletAddress, privateKey } = await createWallet()
+    const encryptedPrivateKey = encrypt(privateKey)
 
     const hashedPassword = await bcrypt.hash(password, 12)
 
@@ -31,7 +33,7 @@ export async function POST(request: Request) {
         name,
         hashedPassword,
         walletAddress,
-        walletKey: encryptedPrivateKey, // Store encrypted private key
+        walletKey: encryptedPrivateKey,
         subscription: {
           create: {
             plan: "starter",

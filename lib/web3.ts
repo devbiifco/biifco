@@ -1,5 +1,6 @@
 import { ethers } from 'ethers';
 import Web3 from 'web3';
+import { encrypt } from '@/lib/encryption';
 
 export const createWallet = async () => {
   try {
